@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--
+      The Multiples of 3 and 5
+ parameters will be replaced with the
+      document title extracted from the <h1> element or
+      file name, if there is no <h1> heading
+    -->
+    <title>Multiples of 3 and 5
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="content/style.css" />
+    <script src="content/tips.js" type="text/javascript"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row" style="margin-top:30px">
+        <div class="span1"></div>
+        <div class="span10" id="main">
+          <h1>Multiples of 3 and 5</h1>
+<h2>Problem 1</h2>
+<blockquote>
+<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
+</blockquote>
+<p><a href="https://projecteuler.net/problem=1" title="project euler">This problem is part of a project called Project Euler, that you can find here.</a></p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">	<span class="c">//------------ Linear Time Solution: O(n)</span>
+	<span class="c">// time execution is directly proportional to the input size</span>
+</code></pre></td>
+</tr>
+</table>
+<p>this function yields a list of multiples of 3 and 5:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">            <span class="c">// get all the multiples</span>
+            <span class="k">let</span> <span class="i">multiplesOf3And5</span> <span class="i">n</span> <span class="o">=</span>
+                <span class="k">match</span> <span class="i">n</span> <span class="k">with</span>
+                    |<span class="i">n</span> <span class="k">when</span> <span class="i">n</span><span class="o">&lt;=</span><span class="n">0</span> <span class="k">-&gt;</span> []
+                    |_<span class="k">-&gt;</span> [<span class="k">for</span> <span class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="i">n</span><span class="o">-</span><span class="n">1</span> <span class="k">do</span>
+                            <span class="k">if</span> <span class="i">i</span><span class="o">%</span><span class="n">3</span> <span class="o">=</span> <span class="n">0</span> <span class="o">||</span> <span class="i">i</span><span class="o">%</span><span class="n">5</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span>
+                                <span class="k">yield</span> <span class="i">i</span>
+                            <span class="k">else</span>
+                                <span class="k">yield</span> <span class="n">0</span>]
+                            <span class="o">|&gt;</span><span class="i">List</span><span class="o">.</span><span class="i">filter</span> (<span class="k">fun</span> <span class="i">x</span> <span class="k">-&gt;</span> <span class="i">x</span><span class="o">&lt;&gt;</span><span class="n">0</span>) 
+</code></pre></td>
+</tr>
+</table>
+<p>then we can sum them up:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">            <span class="c">//sums the results, including the zeros</span>
+            <span class="k">let</span> <span class="i">sumOfMultiplesOf3And5_II</span> <span class="i">n</span> <span class="o">=</span>
+                <span class="k">match</span> <span class="i">n</span> <span class="k">with</span>
+                    |<span class="i">n</span> <span class="k">when</span> <span class="i">n</span><span class="o">&lt;=</span><span class="n">0</span> <span class="k">-&gt;</span> <span class="n">0</span>
+                    |_<span class="k">-&gt;</span> [<span class="k">for</span> <span class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="i">n</span><span class="o">-</span><span class="n">1</span> <span class="k">do</span>
+                            <span class="k">if</span> <span class="i">i</span><span class="o">%</span><span class="n">3</span> <span class="o">=</span> <span class="n">0</span> <span class="o">||</span> <span class="i">i</span><span class="o">%</span><span class="n">5</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span>
+                                <span class="k">yield</span> <span class="i">i</span>
+                            <span class="k">else</span>
+                                <span class="k">yield</span> <span class="n">0</span>]
+                            <span class="o">|&gt;</span> <span class="i">List</span><span class="o">.</span><span class="i">sum</span>
+</code></pre></td>
+</tr>
+</table>
+<p>the algorithm is O(n), so if you have, let's say 10e12 then you'have to scan all the numbers from 1 to (10e12-1).
+Can we do better?</p>
+<<< O(n)
+time execution is NOT directly proportional to the input size
+<p>We could sum the multiples of 3, the multiples of 5 and then subtract the multiple of 3x5 'cause already counted before:</p>
+<p>sample for 3
+consider n=mq+r or n = mx3 + (n%3) so m = (n - (n%3))/3
+is the last factor multiple of 3 before n</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">            <span class="k">let</span> <span class="i">sumOfmultiplesOfZ</span> <span class="i">n</span> <span class="i">h</span> <span class="o">=</span>
+                <span class="k">let</span> <span class="i">k</span> <span class="o">=</span> <span class="i">n</span><span class="o">-</span><span class="n">1</span> <span class="c">//below n</span>
+                <span class="k">let</span> <span class="i">m</span> <span class="o">=</span> (<span class="i">n</span> <span class="o">-</span> (<span class="i">n</span><span class="o">%</span><span class="i">h</span>))<span class="o">/</span><span class="i">h</span>
+                <span class="k">match</span> <span class="i">k</span> <span class="k">with</span>
+                    |<span class="i">k</span> <span class="k">when</span> <span class="i">k</span><span class="o">&lt;=</span><span class="n">0</span> <span class="k">-&gt;</span> <span class="n">0</span>
+                    |_<span class="k">-&gt;</span> [<span class="k">for</span> <span class="i">i</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="i">m</span> <span class="k">do</span>
+                            <span class="k">yield</span> <span class="i">i</span><span class="o">*</span><span class="i">h</span>]
+                            <span class="o">|&gt;</span><span class="i">List</span><span class="o">.</span><span class="i">sum</span>
+</code></pre></td>
+</tr>
+</table>
+<p>we have summed numbers divisible by 15 twice ( so we have to subtract them from the sums of the two multiples) once for 3 and then for 5... ie. 30 =3x5x2 as 3x10 and 5x6</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">            <span class="k">let</span> <span class="i">sumOfMultiplesOf3And5_III</span> <span class="i">n</span> <span class="o">=</span>
+                <span class="i">sumOfmultiplesOfZ</span> <span class="i">n</span> <span class="n">3</span> <span class="o">+</span> <span class="i">sumOfmultiplesOfZ</span> <span class="i">n</span> <span class="n">5</span> <span class="o">-</span> <span class="i">sumOfmultiplesOfZ</span> <span class="i">n</span> <span class="n">15</span>
+</code></pre></td>
+</tr>
+</table>
+
+          
+        </div>
+        <div class="span1"></div>
+      </div>
+    </div>
+  </body>
+</html>
