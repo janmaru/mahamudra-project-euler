@@ -59,7 +59,10 @@
     <None Include="2.fsx" />
     <None Include="3.fsx" />
     <None Include="4.fsx" />
-    <None Include="_1.md" />
+    <None Include="5.fsx" />
+    <None Include="6.fsx" />
+    <None Include="7.fsx" />
+    <None Include="1.md" />
     <None Include="License.md" />
     <None Include="Readme.md" />
     <None Include="2.md" />
@@ -71,7 +74,6 @@
     <None Include="template-file.html" />
     <Content Include="style.css" />
     <Content Include="tips.js" />
-    <None Include="1.md" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CSharpFormat">
